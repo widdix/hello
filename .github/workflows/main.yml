@@ -24,6 +24,7 @@ jobs:
       - name: Build and push images to ECR
         run: |
           docker buildx create --use
+          ls
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:latest -f docker/Dockerfile_latest .
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:v1 -f docker/Dockerfile_v1 .
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:v2 -f docker/Dockerfile_v2 .
