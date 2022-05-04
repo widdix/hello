@@ -18,13 +18,10 @@ jobs:
           role-to-assume: arn:aws:iam::820394158530:role/github-actions-widdix-hello
           role-session-name: github-actions
           aws-region: eu-west-1
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
       - name: Build and push images to ECR
         run: |
+          aws ecr-public get-login-password | docker login --username AWS --password-stdin public.ecr.aws
           docker buildx create --use
-          ls
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:latest -f Dockerfile_latest .
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:v1 -f Dockerfile_v1 .
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:v2 -f Dockerfile_v2 .
