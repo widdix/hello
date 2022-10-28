@@ -1,3 +1,4 @@
+---
 name: CI
 on:
   push:
@@ -6,6 +7,9 @@ on:
 permissions:
   id-token: write
   contents: read
+defaults:
+  run:
+    shell: bash
 concurrency: ci
 jobs:
   build:
