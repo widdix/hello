@@ -13,7 +13,7 @@ defaults:
 concurrency: ci
 jobs:
   build:
-    runs-on: ['hyperenv', 'medium']
+    runs-on: 'ubuntu-22.04' # ['hyperenv', 'medium']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,6 +25,7 @@ jobs:
           aws-region: eu-west-1
       - name: Build and push images to ECR
         run: |
+          whoami
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:latest -f Dockerfile_latest .
