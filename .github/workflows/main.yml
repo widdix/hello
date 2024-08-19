@@ -13,7 +13,7 @@ defaults:
 concurrency: ci
 jobs:
   build:
-    runs-on: 'ubuntu-22.04' # ['hyperenv', 'medium-eu-west-1']
+    runs-on: ['hyperenv-beta', 'byo-vpc'] # 'ubuntu-22.04' # ['hyperenv', 'medium-eu-west-1']
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
