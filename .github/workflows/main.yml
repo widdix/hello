@@ -25,14 +25,7 @@ jobs:
           aws-region: eu-west-1
       - name: Build and push images to ECR
         run: |
-          cat /home/ubuntu/.docker/config.json
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
-          whoami
-          cat /home/ubuntu/.docker/config.json
-          echo '{"ServerURL":"https://index.docker.io/v1","Username":"david","Secret":"passw0rd1"}' | docker-credential-wrapper store
-          cat /home/ubuntu/.docker/config.json
-          echo 'https://index.docker.io/v1' | docker-credential-wrapper get
-          echo 'public.ecr.aws' | docker-credential-wrapper get
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:latest -f Dockerfile_latest .
           docker buildx build --platform linux/amd64,linux/arm64 --push -t public.ecr.aws/l0j0k6k8/hello:v1 -f Dockerfile_v1 .
