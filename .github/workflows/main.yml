@@ -25,6 +25,7 @@ jobs:
           aws-region: eu-west-1
       - name: Build and push images to ECR
         run: |
+          cat /home/ubuntu/.docker/config.json
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
           whoami
           cat /home/ubuntu/.docker/config.json
